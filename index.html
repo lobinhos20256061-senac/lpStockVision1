@@ -70,13 +70,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navMenu">
       <ul class="navbar-nav mx-auto">
-        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="#funcionalidades">Funcionalidades</a></li>
         <li class="nav-item"><a class="nav-link" href="#beneficios">Benefícios</a></li>
-        <li class="nav-item"><a class="nav-link" href="#depoimentos">Depoimentos</a></li>
         <li class="nav-item"><a class="nav-link" href="#demonstracao">Demonstração</a></li>
+        <li class="nav-item"><a class="nav-link" href="#depoimentos">Depoimentos</a></li>
         <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
       </ul>
       <div class="navbar-actions">
         <button type="button" id="themeToggle" class="theme-toggle" aria-label="Alternar modo claro e escuro" aria-pressed="false">
@@ -107,6 +105,7 @@
           <span class="badge-pill"><i class="bi bi-mortarboard-fill"></i> Ensino Prático</span>
           <span class="badge-pill"><i class="bi bi-cpu-fill"></i> Plataforma Inteligente</span>
           <span class="badge-pill"><i class="bi bi-truck"></i> Logística na Prática</span>
+          <span class="badge-pill"><i class="bi bi-robot"></i> Motor de IA ativo</span>
         </div>
 
         <h1 class="hero-title">
@@ -125,25 +124,6 @@
             <span class="play-circle"><i class="bi bi-play-fill"></i></span>
             Assistir Demonstração
           </button>
-        </div>
-
-        <div class="hero-stats">
-          <div class="stat-item">
-            <span class="stat-number" data-count="42">0</span><span class="stat-suffix">+</span>
-            <span class="stat-label">Escolas parceiras</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number" data-count="8500">0</span><span class="stat-suffix">+</span>
-            <span class="stat-label">Alunos ativos</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number" data-count="6">0</span><span class="stat-suffix">+</span>
-            <span class="stat-label">Anos de experiência</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number" data-count="120000">0</span><span class="stat-suffix">+</span>
-            <span class="stat-label">Simulações realizadas</span>
-          </div>
         </div>
       </div>
 
@@ -366,7 +346,223 @@
   </div>
 </section>
 
-<!-- ==================== SEÇÃO 4 — DEPOIMENTOS ==================== -->
+<!-- ==================== SEÇÃO 4 — DIFERENCIAL ==================== -->
+<section id="diferencial" class="section section-differential">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-7" data-animate="slide-up">
+        <div class="kicker">O diferencial</div>
+        <h2 class="section-title display">O motor de previsão de demanda</h2>
+        <p class="section-desc">Antes de faltar produto na prateleira, o sistema já sabe.</p>
+
+        <div class="dif-steps">
+          <div class="dif-step">
+            <div class="num mono">1</div>
+            <p><strong>Histórico ponderado.</strong> Calcula a média ponderada das vendas dos últimos três meses.</p>
+          </div>
+          <div class="dif-step">
+            <div class="num mono">2</div>
+            <p><strong>Consumo diário.</strong> Estima quanto do produto sai, em média, por dia.</p>
+          </div>
+          <div class="dif-step">
+            <div class="num mono">3</div>
+            <p><strong>Ponto de pedido.</strong> Define o nível de estoque em que uma nova compra deve ser feita.</p>
+          </div>
+          <div class="dif-step">
+            <div class="num mono">4</div>
+            <p><strong>Alerta de risco.</strong> Sinaliza risco de ruptura e sugere a quantidade ideal antes que o estoque zere.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5" data-animate="fade-in">
+        <div class="forecast-mock glass">
+          <div class="forecast-head">
+            <span class="t">Previsão de demanda — Filtro de água</span>
+            <span class="badge2 mono">PRÓX. 30 DIAS</span>
+          </div>
+          <div class="forecast-chart">
+            <svg viewBox="0 0 400 150" preserveAspectRatio="none">
+              <polyline points="0,110 50,95 100,100 150,70 200,80 250,50 300,55 350,25 400,30" fill="none" stroke="#0077fa" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="200,80 250,60 300,45 350,35 400,15" fill="none" stroke="#6cc602" stroke-width="2.5" stroke-dasharray="5 5" stroke-linecap="round"/>
+              <circle cx="200" cy="80" r="4" fill="#fff"/>
+              <line x1="200" y1="0" x2="200" y2="150" stroke="rgba(255,255,255,0.15)" stroke-dasharray="3 4"/>
+            </svg>
+          </div>
+          <div class="forecast-panel">
+            <span class="l">Sugestão de compra</span>
+            <span class="v">Repor 60 unidades</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SEÇÃO 5 — PARCEIROS ==================== -->
+<section id="parceiros" class="section section-partners">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-7" data-animate="slide-up">
+        <div class="kicker">Outro diferencial</div>
+        <h2 class="section-title display">Fornecedores, parceiros e notas fiscais, num só cadastro</h2>
+        <p class="section-desc">Centralize quem fornece, quem transporta e quem entrega — e crie produtos automaticamente a partir da nota fiscal.</p>
+
+        <div class="parc-list">
+          <div class="parc-item">
+            <div class="ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="7" r="3"/>
+                <path d="M2 21v-2a5 5 0 015-5h4a5 5 0 015 5v2"/>
+                <circle cx="18" cy="8" r="2.2"/>
+                <path d="M22 21v-1.5a3.5 3.5 0 00-2.5-3.36"/>
+              </svg>
+            </div>
+            <div>
+              <h4>Cadastro único de parceiros</h4>
+              <p>Fornecedores, transportadoras e centros de distribuição integrados à mesma base.</p>
+            </div>
+          </div>
+
+          <div class="parc-item">
+            <div class="ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                <path d="M14 2v6h6"/>
+              </svg>
+            </div>
+            <div>
+              <h4>Importação via XML de NF-e</h4>
+              <p>Suba a nota fiscal e o sistema lê os campos principais para criar ou atualizar o produto.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5" data-animate="fade-in">
+        <div class="nfe-mock glass">
+          <div class="nfe-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3v12"/>
+              <path d="M7 10l5 5 5-5"/>
+              <path d="M4 20h16"/>
+            </svg>
+          </div>
+          <div class="mono">Envie o XML da nota fiscal</div>
+          <div class="fname">NFe_35260712345_00198.xml</div>
+          <div class="nfe-arrow">↓</div>
+          <div class="nfe-result">✓ Produto "Filtro de água" criado automaticamente</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SEÇÃO 6 — LOGÍSTICA REVERSA ==================== -->
+<section id="reversa" class="section section-reversa">
+  <div class="container">
+    <div class="section-heading" data-animate="fade-in">
+      <div class="kicker">Logística reversa</div>
+      <h2 class="section-title display">Todo retorno vira dado — não só devolução</h2>
+      <p class="section-desc">Cada item devolvido é classificado por motivo, ajusta o estoque automaticamente e alimenta os indicadores ESG.</p>
+    </div>
+
+    <div class="row g-4 align-items-stretch">
+      <div class="col-lg-7" data-animate="slide-up">
+        <div class="rev-reasons">
+          <div class="rev-reason">
+            <div class="ic danger">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round">
+                <path d="M12 9v4"/>
+                <path d="M12 17h.01"/>
+                <circle cx="12" cy="12" r="9"/>
+              </svg>
+            </div>
+            <div>
+              <h5>Defeito</h5>
+              <p>Produto com falha, ajustado no estoque comercial.</p>
+            </div>
+          </div>
+
+          <div class="rev-reason">
+            <div class="ic info">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 7v5l3 3"/>
+              </svg>
+            </div>
+            <div>
+              <h5>Vencimento</h5>
+              <p>Itens próximos ou fora da validade, sinalizados com alerta.</p>
+            </div>
+          </div>
+
+          <div class="rev-reason">
+            <div class="ic success">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 7h16"/>
+                <path d="M6 7l1 13a2 2 0 002 2h6a2 2 0 002-2l1-13"/>
+                <path d="M10 3h4"/>
+              </svg>
+            </div>
+            <div>
+              <h5>Descarte</h5>
+              <p>Registrado como impacto ambiental, com métrica de CO2.</p>
+            </div>
+          </div>
+
+          <div class="rev-reason">
+            <div class="ic reuse">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 2l4 4-4 4"/>
+                <path d="M3 11V9a4 4 0 014-4h14"/>
+                <path d="M7 22l-4-4 4-4"/>
+                <path d="M21 13v2a4 4 0 01-4 4H3"/>
+              </svg>
+            </div>
+            <div>
+              <h5>Reuso</h5>
+              <p>Item retorna ao estoque comercial após triagem.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5" data-animate="fade-in">
+        <div class="rev-mock glass">
+          <div class="rev-mock-head">
+            <span class="t">Indicadores ESG do mês</span>
+          </div>
+          <div class="donut-row">
+            <svg width="110" height="110" viewBox="0 0 42 42">
+              <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#EEF2F8" stroke-width="6"></circle>
+              <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#6cc602" stroke-width="6" stroke-dasharray="42 100" stroke-dashoffset="25" stroke-linecap="round"></circle>
+              <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#0077fa" stroke-width="6" stroke-dasharray="28 100" stroke-dashoffset="-17" stroke-linecap="round"></circle>
+              <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#001b5b" stroke-width="6" stroke-dasharray="20 100" stroke-dashoffset="-45" stroke-linecap="round" opacity="0.5"></circle>
+            </svg>
+            <div class="legend">
+              <div><i style="background:#6cc602"></i>Reuso — 42%</div>
+              <div><i style="background:#0077fa"></i>Descarte — 28%</div>
+              <div><i style="background:#001b5b; opacity:.5"></i>Defeito/Venc. — 30%</div>
+            </div>
+          </div>
+          <div class="esg-mini">
+            <div>
+              <div class="v">318 kg</div>
+              <div class="l">RECICLADO NO MÊS</div>
+            </div>
+            <div>
+              <div class="v">94 kg</div>
+              <div class="l">CO2 EVITADO</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SEÇÃO 7 — DEPOIMENTOS ==================== -->
 <section id="depoimentos" class="section section-testimonials">
   <div class="container">
     <div class="section-heading" data-animate="fade-in">
@@ -635,9 +831,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
       </div>
       <div class="modal-body">
-        <div class="video-placeholder">
-          <i class="bi bi-play-circle"></i>
-          <p>O vídeo institucional será exibido aqui.</p>
+        <div class="ratio ratio-16x9">
+          <iframe src="https://www.youtube.com/embed/QRqrT4IggDo?si=5P8GCTjBYeaerzQf" title="Vídeo Institucional" allowfullscreen></iframe>
         </div>
       </div>
     </div>
