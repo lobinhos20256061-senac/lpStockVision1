@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- 0. MODO CLARO / ESCURO ---------- */
   const htmlEl = document.documentElement;
   const themeToggleBtn = document.getElementById('themeToggle');
+  const themeIconSun = document.querySelector('.theme-icon-sun');
+  const themeIconMoon = document.querySelector('.theme-icon-moon');
 
   const setThemeButtonState = (theme) => {
     if (!themeToggleBtn) return;
@@ -16,10 +18,22 @@ document.addEventListener('DOMContentLoaded', () => {
       'aria-label',
       theme === 'light' ? 'Ativar modo escuro' : 'Ativar modo claro'
     );
+    
+    // Atualiza visibilidade dos ícones
+    if (themeIconSun && themeIconMoon) {
+      if (theme === 'light') {
+        themeIconSun.style.opacity = '0.4';
+        themeIconMoon.style.opacity = '1';
+      } else {
+        themeIconSun.style.opacity = '1';
+        themeIconMoon.style.opacity = '0.4';
+      }
+    }
   };
 
   // Estado inicial já foi definido no <head> (evita flash); só sincroniza o botão
-  setThemeButtonState(htmlEl.getAttribute('data-theme') || 'dark');
+  const initialTheme = htmlEl.getAttribute('data-theme') || 'dark';
+  setThemeButtonState(initialTheme);
 
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
