@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- Define o tema (claro/escuro) antes da renderização, evitando flash de cor errada -->
+<script>
+  (function () {
+    var saved = localStorage.getItem('stockvision-theme');
+    var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    var theme = saved || (prefersLight ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stock Vision — Aprenda Logística na Prática</title>
+<meta name="description" content="Stock Vision é a plataforma que transforma a teoria de Logística em prática real: simule estoque, movimentações e relatórios como em uma empresa de verdade.">
+<meta name="keywords" content="Stock Vision, logística, ensino técnico, simulação de estoque, plataforma educacional, logística reversa, dashboard logística">
+<meta name="author" content="Stock Vision">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Stock Vision — Aprenda Logística na Prática">
+<meta property="og:description" content="A plataforma que leva a rotina de um centro de distribuição para dentro da sala de aula.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+
+<!-- Favicon (placeholder) -->
+<link rel="icon" href="data:,">
+
+<!-- Google Fonts: Space Grotesk (display/dados) + Inter (corpo) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ==================== LOADING SCREEN ==================== -->
+<div id="loading-screen" aria-hidden="true">
+  <div class="loader-mark">
+    <span class="loader-box"></span>
+    <span class="loader-box"></span>
+    <span class="loader-box"></span>
+  </div>
+  <p class="loader-text">carregando o estoque<span class="dots"><span>.</span><span>.</span><span>.</span></span></p>
+</div>
+
+<!-- ==================== SCROLL PROGRESS BAR ==================== -->
+<div id="scroll-progress" aria-hidden="true"></div>
+
+<!-- ==================== NAVBAR ==================== -->
+<nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar" aria-label="Navegação principal">
+  <div class="container">
+    <a class="navbar-brand" href="#home">
+      <span class="brand-mark" aria-hidden="true">
+        <span class="brand-dot"></span>
+        <span class="brand-dot"></span>
+        <span class="brand-dot"></span>
+      </span>
+      Stock<strong>Vision</strong>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#funcionalidades">Funcionalidades</a></li>
+        <li class="nav-item"><a class="nav-link" href="#beneficios">Benefícios</a></li>
+        <li class="nav-item"><a class="nav-link" href="#depoimentos">Depoimentos</a></li>
+        <li class="nav-item"><a class="nav-link" href="#demonstracao">Demonstração</a></li>
+        <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <button type="button" id="themeToggle" class="theme-toggle" aria-label="Alternar modo claro e escuro" aria-pressed="false">
+          <i class="bi bi-sun-fill theme-icon-sun"></i>
+          <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
+          <span class="theme-toggle-thumb"></span>
+        </button>
+        <a href="#demonstracao" class="btn btn-cta-nav">Experimentar Agora</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- ==================== HERO ==================== -->
+<header id="home" class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-glow hero-glow-blue"></div>
+    <div class="hero-glow hero-glow-green"></div>
+    <div class="hero-grid"></div>
+  </div>
+
+  <div class="container hero-inner">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6 hero-copy" data-animate="slide-up">
+        <div class="hero-badges">
+          <span class="badge-pill"><i class="bi bi-mortarboard-fill"></i> Ensino Prático</span>
+          <span class="badge-pill"><i class="bi bi-cpu-fill"></i> Plataforma Inteligente</span>
+          <span class="badge-pill"><i class="bi bi-truck"></i> Logística na Prática</span>
+        </div>
+
+        <h1 class="hero-title">
+          Sua sala de aula agora tem um <span class="text-gradient">centro de distribuição.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          O Stock Vision transforma o conteúdo de Logística em algo que você opera de verdade: cadastra produtos, movimenta estoque e lê indicadores como em uma empresa real — sem precisar de uma empresa real.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#demonstracao" class="btn btn-primary-cta">
+            Experimentar Agora <i class="bi bi-arrow-right"></i>
+          </a>
+          <button type="button" class="btn btn-ghost-cta" data-bs-toggle="modal" data-bs-target="#videoModal">
+            <span class="play-circle"><i class="bi bi-play-fill"></i></span>
+            Assistir Demonstração
+          </button>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number" data-count="42">0</span><span class="stat-suffix">+</span>
+            <span class="stat-label">Escolas parceiras</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-count="8500">0</span><span class="stat-suffix">+</span>
+            <span class="stat-label">Alunos ativos</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-count="6">0</span><span class="stat-suffix">+</span>
+            <span class="stat-label">Anos de experiência</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-count="120000">0</span><span class="stat-suffix">+</span>
+            <span class="stat-label">Simulações realizadas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6" data-animate="fade-in">
+        <!-- SIGNATURE ELEMENT: rota logística animada -->
+        <div class="hero-mockup-wrap">
+          <div class="mockup-card glass">
+            <div class="mockup-topbar">
+              <span></span><span></span><span></span>
+              <span class="mockup-url"><i class="bi bi-lock-fill"></i> app.stockvision.com/dashboard</span>
+            </div>
+            <div class="mockup-body">
+              <div class="mockup-sidebar">
+                <span class="ms-item active"><i class="bi bi-grid-fill"></i></span>
+                <span class="ms-item"><i class="bi bi-box-seam-fill"></i></span>
+                <span class="ms-item"><i class="bi bi-arrow-repeat"></i></span>
+                <span class="ms-item"><i class="bi bi-bar-chart-fill"></i></span>
+                <span class="ms-item"><i class="bi bi-gear-fill"></i></span>
+              </div>
+              <div class="mockup-content">
+                <div class="mockup-kpis">
+                  <div class="kpi-card"><span class="kpi-label">Itens em estoque</span><span class="kpi-value">3.482</span></div>
+                  <div class="kpi-card"><span class="kpi-label">Giro médio</span><span class="kpi-value">4,7x</span></div>
+                  <div class="kpi-card"><span class="kpi-label">Acuracidade</span><span class="kpi-value">98%</span></div>
+                </div>
+                <!-- rota logística: elemento assinatura -->
+                <div class="logistics-route" aria-hidden="true">
+                  <i class="bi bi-house-door-fill route-node" style="--pos:0%"></i>
+                  <i class="bi bi-box-seam route-node" style="--pos:33%"></i>
+                  <i class="bi bi-truck route-node" style="--pos:66%"></i>
+                  <i class="bi bi-shop route-node" style="--pos:100%"></i>
+                  <span class="route-line"></span>
+                  <span class="route-pulse"></span>
+                </div>
+                <div class="mockup-chart-bars">
+                  <span style="--h:40%"></span><span style="--h:65%"></span><span style="--h:50%"></span>
+                  <span style="--h:80%"></span><span style="--h:55%"></span><span style="--h:70%"></span>
+                  <span style="--h:90%"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="floating-chip chip-1"><i class="bi bi-check-circle-fill"></i> Movimentação registrada</div>
+          <div class="floating-chip chip-2"><i class="bi bi-graph-up-arrow"></i> Estoque otimizado</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#funcionalidades" class="scroll-cue" aria-label="Rolar para próxima seção">
+    <span></span>
+  </a>
+</header>
+
+<!-- ==================== SEÇÃO 2 — FUNCIONALIDADES ==================== -->
+<section id="funcionalidades" class="section section-features">
+  <div class="container">
+    <div class="section-heading" data-animate="fade-in">
+      <span class="eyebrow">O que você vai usar</span>
+      <h2>Por que aprender com a <span class="text-gradient">Stock Vision?</span></h2>
+      <p>Tudo o que um profissional de logística usa no dia a dia, adaptado para quem está aprendendo.</p>
+    </div>
+
+    <div class="row g-4">
+
+      <div class="col-md-6 col-lg-3" data-animate="slide-up" data-delay="0">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-grid-1x2-fill"></i></div>
+          <h3>Dashboard Inteligente</h3>
+          <p>Veja o panorama do estoque em tempo real, com indicadores visuais fáceis de interpretar.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3" data-animate="slide-up" data-delay="100">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-box-seam-fill"></i></div>
+          <h3>Cadastro de Produtos</h3>
+          <p>Crie fichas completas de produtos e entenda como a informação certa evita erros no estoque.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3" data-animate="slide-up" data-delay="200">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-boxes"></i></div>
+          <h3>Controle de Estoque</h3>
+          <p>Entradas, saídas e saldos calculados automaticamente, como em um sistema profissional.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3" data-animate="slide-up" data-delay="300">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-arrow-repeat"></i></div>
+          <h3>Logística Reversa</h3>
+          <p>Simule devoluções e trocas e entenda o fluxo completo de um produto, ida e volta.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3" data-animate="slide-up" data-delay="0">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-file-earmark-bar-graph-fill"></i></div>
+          <h3>Relatórios</h3>
+          <p>Gere relatórios automáticos e pratique leitura de dados aplicada à tomada de decisão.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3" data-animate="slide-up" data-delay="100">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-speedometer2"></i></div>
+          <h3>Indicadores</h3>
+          <p>Acompanhe KPIs reais de logística, como giro de estoque e acuracidade de inventário.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3" data-animate="slide-up" data-delay="200">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-arrow-left-right"></i></div>
+          <h3>Movimentações</h3>
+          <p>Registre cada entrada e saída e visualize o histórico completo de forma organizada.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3" data-animate="slide-up" data-delay="300">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-diagram-3-fill"></i></div>
+          <h3>Simulações</h3>
+          <p>Coloque a mão na massa em cenários guiados, feitos para o que você estuda em sala.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SEÇÃO 3 — BENEFÍCIOS / ANTES x DEPOIS ==================== -->
+<section id="beneficios" class="section section-compare">
+  <div class="container">
+    <div class="section-heading" data-animate="fade-in">
+      <span class="eyebrow">A diferença na prática</span>
+      <h2>Aprender logística nunca foi <span class="text-gradient">tão prático.</span></h2>
+      <p>Sabemos onde dói: teoria sem prática cansa. Veja o que muda com a Stock Vision.</p>
+    </div>
+
+    <div class="row g-4 compare-grid">
+      <div class="col-md-4" data-animate="slide-up" data-delay="0">
+        <div class="compare-card">
+          <span class="compare-tag before">Antes</span>
+          <p>Sem prática real, só teoria no quadro</p>
+          <div class="compare-arrow"><i class="bi bi-arrow-down"></i></div>
+          <span class="compare-tag after">Depois</span>
+          <p>Simulações reais de operação logística</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-animate="slide-up" data-delay="100">
+        <div class="compare-card">
+          <span class="compare-tag before">Antes</span>
+          <p>Planilhas confusas e difíceis de manter</p>
+          <div class="compare-arrow"><i class="bi bi-arrow-down"></i></div>
+          <span class="compare-tag after">Depois</span>
+          <p>Dashboard intuitivo que qualquer um entende</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-animate="slide-up" data-delay="200">
+        <div class="compare-card">
+          <span class="compare-tag before">Antes</span>
+          <p>Pouco ou nenhum contato com sistemas reais</p>
+          <div class="compare-arrow"><i class="bi bi-arrow-down"></i></div>
+          <span class="compare-tag after">Depois</span>
+          <p>Experiência próxima da rotina profissional</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-institutional" data-animate="fade-in">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5">
+          <span class="eyebrow">Conheça a proposta</span>
+          <h3>Um minuto para entender o que muda na sua turma</h3>
+          <p>Assista ao vídeo institucional e veja como escolas técnicas estão usando a Stock Vision para aproximar teoria e prática.</p>
+          <button type="button" class="btn btn-ghost-cta" data-bs-toggle="modal" data-bs-target="#videoModal">
+            <span class="play-circle"><i class="bi bi-play-fill"></i></span>
+            Assistir vídeo institucional
+          </button>
+        </div>
+        <div class="col-lg-7">
+          <button type="button" class="video-player-frame" data-bs-toggle="modal" data-bs-target="#videoModal" aria-label="Reproduzir vídeo institucional">
+            <span class="video-play-btn"><i class="bi bi-play-fill"></i></span>
+            <span class="video-frame-glow"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="schools-showcase" data-animate="fade-in">
+      <p class="showcase-note">Exemplos ilustrativos de aplicação em turmas técnicas <span>*cenários fictícios, representativos do uso da plataforma</span></p>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="school-card">
+            <i class="bi bi-building"></i>
+            <h4>Escola Técnica Horizonte*</h4>
+            <p>Turma de 2º ano passou a usar simulações semanais de estoque nas aulas de Logística.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="school-card">
+            <i class="bi bi-building"></i>
+            <h4>Colégio Rota Nova*</h4>
+            <p>Projeto integrador com relatórios gerados pelos próprios alunos na plataforma.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="school-card">
+            <i class="bi bi-building"></i>
+            <h4>Instituto Vetor Técnico*</h4>
+            <p>Uso da Stock Vision como preparação prática para estágios em centros de distribuição.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SEÇÃO 4 — DEPOIMENTOS ==================== -->
+<section id="depoimentos" class="section section-testimonials">
+  <div class="container">
+    <div class="section-heading" data-animate="fade-in">
+      <span class="eyebrow">Quem já usa</span>
+      <h2>O que <span class="text-gradient">alunos e instituições</span> dizem</h2>
+    </div>
+
+    <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel" data-animate="fade-in">
+      <div class="carousel-inner">
+
+        <div class="carousel-item active">
+          <div class="testimonial-card">
+            <div class="testimonial-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+            <p class="testimonial-text">"Consegui entender giro de estoque de um jeito que nenhuma aula tinha conseguido explicar antes. Parece que estou trabalhando de verdade."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar" aria-hidden="true">LM</div>
+              <div>
+                <strong>Larissa M.</strong>
+                <span>Aluna do 3º ano — Técnico em Logística</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="testimonial-card">
+            <div class="testimonial-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+            <p class="testimonial-text">"A gente brinca que virou 'gerente de estoque' por um dia. É simples de usar e mostra as consequências de cada decisão."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar" aria-hidden="true">GP</div>
+              <div>
+                <strong>Gabriel P.</strong>
+                <span>Aluno do 2º ano — Técnico em Logística</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="testimonial-card">
+            <div class="testimonial-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+            <p class="testimonial-text">"Como coordenadora, vi o engajamento da turma mudar depois que trocamos a planilha pela plataforma. Os relatórios facilitam demais a correção."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar" aria-hidden="true">CS</div>
+              <div>
+                <strong>Profª Camila S.</strong>
+                <span>Coordenação pedagógica — Ensino Técnico</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+        <span class="custom-carousel-btn"><i class="bi bi-chevron-left"></i></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+        <span class="custom-carousel-btn"><i class="bi bi-chevron-right"></i></span>
+        <span class="visually-hidden">Próximo</span>
+      </button>
+
+      <div class="carousel-indicators-custom">
+        <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="0" class="active" aria-label="Depoimento 1"></button>
+        <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="1" aria-label="Depoimento 2"></button>
+        <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="2" aria-label="Depoimento 3"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SEÇÃO 5 — DEMONSTRAÇÃO ==================== -->
+<section id="demonstracao" class="section section-demo">
+  <div class="demo-bg" aria-hidden="true"></div>
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6" data-animate="slide-up">
+        <span class="eyebrow eyebrow-light">Veja por dentro</span>
+        <h2 class="text-white">Pronto para operar seu <span class="text-gradient">próprio estoque?</span></h2>
+        <p class="demo-text">
+          Acesse a demonstração completa da plataforma e explore, na prática, cada módulo que você vai usar nas suas aulas de Logística.
+        </p>
+
+        <ul class="demo-feature-list">
+          <li><i class="bi bi-check-circle-fill"></i> Dashboard</li>
+          <li><i class="bi bi-check-circle-fill"></i> Produtos</li>
+          <li><i class="bi bi-check-circle-fill"></i> Estoque</li>
+          <li><i class="bi bi-check-circle-fill"></i> Logística Reversa</li>
+          <li><i class="bi bi-check-circle-fill"></i> Relatórios</li>
+          <li><i class="bi bi-check-circle-fill"></i> Indicadores</li>
+        </ul>
+
+        <!--
+          IMPORTANTE: o link abaixo é um placeholder.
+          Substituir "https://demo.stockvision.com" pelo endereço oficial
+          da demonstração assim que estiver disponível.
+        -->
+        <a href="https://demo.stockvision.com" target="_blank" rel="noopener" class="btn btn-primary-cta btn-lg-cta">
+          Experimentar Demonstração <i class="bi bi-box-arrow-up-right"></i>
+        </a>
+      </div>
+
+      <div class="col-lg-6" data-animate="fade-in">
+        <div class="demo-illustration glass">
+          <div class="mockup-topbar dark">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="demo-illustration-body">
+            <div class="demo-module"><i class="bi bi-grid-1x2-fill"></i><span>Dashboard</span></div>
+            <div class="demo-module"><i class="bi bi-box-seam-fill"></i><span>Produtos</span></div>
+            <div class="demo-module"><i class="bi bi-boxes"></i><span>Estoque</span></div>
+            <div class="demo-module"><i class="bi bi-arrow-repeat"></i><span>Log. Reversa</span></div>
+            <div class="demo-module"><i class="bi bi-file-earmark-bar-graph-fill"></i><span>Relatórios</span></div>
+            <div class="demo-module"><i class="bi bi-speedometer2"></i><span>Indicadores</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SEÇÃO 6 — FAQ ==================== -->
+<section id="faq" class="section section-faq">
+  <div class="container">
+    <div class="section-heading" data-animate="fade-in">
+      <span class="eyebrow">Dúvidas frequentes</span>
+      <h2>Perguntas que os <span class="text-gradient">estudantes</span> mais fazem</h2>
+    </div>
+
+    <div class="accordion faq-accordion" id="faqAccordion" data-animate="fade-in">
+
+      <div class="accordion-item">
+        <h3 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+            Preciso pagar para usar o Stock Vision?
+          </button>
+        </h3>
+        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">O acesso à demonstração é gratuito. Condições para uso contínuo pela sua escola podem variar — fale com a coordenação ou entre em contato conosco.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h3 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+            Preciso instalar algum programa?
+          </button>
+        </h3>
+        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">Não. O Stock Vision funciona direto no navegador, em computador, tablet ou celular, sem instalação.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h3 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+            É difícil aprender a usar a plataforma?
+          </button>
+        </h3>
+        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">Não. A interface foi pensada para estudantes que estão tendo o primeiro contato com um sistema de logística, com tudo explicado passo a passo.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h3 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+            A plataforma serve para qual etapa do curso técnico?
+          </button>
+        </h3>
+        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">O Stock Vision se encaixa em diferentes momentos do curso técnico em Logística, desde os primeiros conceitos de estoque até projetos integradores mais avançados.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h3 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+            Minha escola pode adotar a plataforma para toda a turma?
+          </button>
+        </h3>
+        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">Sim. É possível levar o Stock Vision para toda a turma ou instituição. Agende uma demonstração para conversarmos sobre o seu contexto.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="faq-cta" data-animate="fade-in">
+      <h3>Ainda ficou com dúvidas?</h3>
+      <button type="button" class="btn btn-primary-cta" data-bs-toggle="modal" data-bs-target="#scheduleModal">
+        Agendar Demonstração <i class="bi bi-calendar-check"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer id="contato" class="site-footer">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <a class="navbar-brand" href="#home">
+          <span class="brand-mark" aria-hidden="true">
+            <span class="brand-dot"></span><span class="brand-dot"></span><span class="brand-dot"></span>
+          </span>
+          Stock<strong>Vision</strong>
+        </a>
+        <p class="footer-desc">Plataforma que aproxima o estudante de Logística da rotina real de um centro de distribuição, com simulações práticas e seguras.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-6">
+        <h4>Navegação</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#funcionalidades">Funcionalidades</a></li>
+          <li><a href="#beneficios">Benefícios</a></li>
+          <li><a href="#depoimentos">Depoimentos</a></li>
+          <li><a href="#demonstracao">Demonstração</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-6">
+        <h4>Institucional</h4>
+        <ul class="footer-links">
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#">Política de Privacidade</a></li>
+          <li><a href="#">Termos de Uso</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4">
+        <h4>Contato</h4>
+        <ul class="footer-contact">
+          <li><i class="bi bi-envelope-fill"></i> contato@stockvision.com</li>
+          <li><i class="bi bi-telephone-fill"></i> (00) 0000-0000</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; <span id="currentYear"></span> Stock Vision. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ==================== BACK TO TOP ==================== -->
+<button id="backToTop" aria-label="Voltar ao topo">
+  <i class="bi bi-arrow-up"></i>
+</button>
+
+<!-- ==================== MODAL: VÍDEO ==================== -->
+<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="videoModalLabel">Vídeo institucional — Stock Vision</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="video-placeholder">
+          <i class="bi bi-play-circle"></i>
+          <p>O vídeo institucional será exibido aqui.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MODAL: AGENDAR DEMONSTRAÇÃO ==================== -->
+<div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="scheduleModalLabel">Agendar Demonstração</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulário sem backend: apenas front-end -->
+        <form id="scheduleForm" novalidate>
+          <div class="mb-3">
+            <label for="formName" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="formName" required>
+          </div>
+          <div class="mb-3">
+            <label for="formEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="formEmail" required>
+          </div>
+          <div class="mb-3">
+            <label for="formSchool" class="form-label">Instituição</label>
+            <input type="text" class="form-control" id="formSchool" required>
+          </div>
+          <div class="mb-3">
+            <label for="formMessage" class="form-label">Mensagem</label>
+            <textarea class="form-control" id="formMessage" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary-cta w-100">Enviar</button>
+          <p id="formSuccess" class="form-success-msg" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap 5 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JS -->
+<script src="script.js"></script>
+</body>
+</html>
