@@ -13,21 +13,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const setThemeButtonState = (theme) => {
     if (!themeToggleBtn) return;
-    themeToggleBtn.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
+    const isLight = theme === 'light';
+
+    themeToggleBtn.setAttribute('aria-pressed', isLight ? 'true' : 'false');
     themeToggleBtn.setAttribute(
       'aria-label',
-      theme === 'light' ? 'Ativar modo escuro' : 'Ativar modo claro'
+      isLight ? 'Ativar modo escuro' : 'Ativar modo claro'
     );
-    
-    // Atualiza visibilidade dos ícones
+    themeToggleBtn.classList.toggle('is-light', isLight);
+    themeToggleBtn.classList.toggle('is-dark', !isLight);
+
     if (themeIconSun && themeIconMoon) {
-      if (theme === 'light') {
-        themeIconSun.style.opacity = '0.4';
-        themeIconMoon.style.opacity = '1';
-      } else {
-        themeIconSun.style.opacity = '1';
-        themeIconMoon.style.opacity = '0.4';
-      }
+      themeIconSun.style.opacity = isLight ? '1' : '0.4';
+      themeIconMoon.style.opacity = isLight ? '0.4' : '1';
     }
   };
 
@@ -154,33 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   statNumbers.forEach(el => statsObserver.observe(el));
 
-  /* ---------- 7. FORMULÁRIO DE AGENDAMENTO (sem backend) ---------- */
-  const scheduleForm = document.getElementById('scheduleForm');
-  const formSuccess = document.getElementById('formSuccess');
-
-  if (scheduleForm) {
-    scheduleForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      if (!scheduleForm.checkValidity()) {
-        scheduleForm.reportValidity();
-        return;
-      }
-
-      // Sem backend: apenas feedback visual de sucesso
-      formSuccess.textContent = 'Solicitação enviada! Nossa equipe entrará em contato em breve.';
-      scheduleForm.reset();
-
-      setTimeout(() => {
-        const modalEl = document.getElementById('scheduleModal');
-        const modalInstance = bootstrap.Modal.getInstance(modalEl);
-        if (modalInstance) modalInstance.hide();
-        formSuccess.textContent = '';
-      }, 2200);
-    });
-  }
-
-  /* ---------- 8. ATUALIZA O ANO NO FOOTER ---------- */
+  /* ---------- 7. ATUALIZA O ANO NO FOOTER ---------- */
   const yearEl = document.getElementById('currentYear');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
